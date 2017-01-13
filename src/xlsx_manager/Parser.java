@@ -9,7 +9,9 @@ import java.util.*;
 import org.apache.poi.ss.usermodel.*; //Pour les row et les Cells
 import org.apache.poi.xssf.usermodel.XSSFSheet; // Pour les feuilles
 import org.apache.poi.xssf.usermodel.XSSFWorkbook; // Pour le fichier excel
-import souverain.Notation;
+
+import Model.Notation;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

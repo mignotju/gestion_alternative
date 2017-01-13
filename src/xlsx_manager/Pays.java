@@ -6,8 +6,10 @@
 package xlsx_manager;
 
 import java.util.List;
+
+import Model.Notation;
+
 import java.util.ArrayList;
-import souverain.Notation;
 
 /**
  *
