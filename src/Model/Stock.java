@@ -1,22 +1,31 @@
 package Model;
-import java.util.*;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.LinkedHashMap;
+
 
 public class Stock {
+	public int stockNumber;
+	public Map<String,Double> dateValeur;
 	
-	private int id;
-	private Map<Date,Double> rentas;
-	
-	
-	public Stock(int id){
-		this.id = id;
-		rentas = new Hashtable<>();
+	public Stock (int stockNum) {
+		stockNumber = stockNum;
+		dateValeur = new LinkedHashMap<String, Double>();
 	}
 	
-	public Stock(int id, Map<Date,Double> rentas){
-		this.id = id;
-		this.rentas = rentas;
+	public String toString() {
+		String res = "";
+		Set listKeys=dateValeur.keySet();  // Obtenir la liste des clés
+		Iterator iterateur=listKeys.iterator();
+		// Parcourir les clés et afficher les entrées de chaque clé;
+		while(iterateur.hasNext())
+		{
+			Object key= iterateur.next();
+			res += key + " => " + dateValeur.get(key) + "\n";
+		}
+		return res;
 	}
-	
-	
-	
 }
