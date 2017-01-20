@@ -19,8 +19,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 public class Parser {
-	private static Set<Integer> stockList = new HashSet<>();
-	private static Map<Integer, Stock> stockNbrStock = new TreeMap<Integer,Stock>();
+	public static Set<Integer> stockList = new HashSet<>();
+	public static Map<Integer, Stock> stockNbrStock = new TreeMap<Integer,Stock>();
 	
 	
 	private static Set<String> nom_colonnes = new HashSet<>();
