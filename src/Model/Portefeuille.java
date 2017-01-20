@@ -30,7 +30,7 @@ public class Portefeuille {
 			rentaForAShare=1;
 			for (int m = 1; m <= 12; m++) {
 				d = new DateYM(year,m);
-				if(shares[i].dateValeur.containsKey(d)){
+				if(shares[i].dateValeur.containsKey(d)) {
 					rentaForAShare*=(1+shares[i].dateValeur.get(d));
 				} else {
 					rentaForAShare*=(1+shares[i].getClosestRenta(d));
