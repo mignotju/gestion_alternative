@@ -133,8 +133,9 @@ public class Parser {
         if (calendar.get(Calendar.MONTH) + 1 < 10) {
             mois = "0" + mois;
         }*/
-        String anneemois = "01/" + month + "/" + year;
-        myStock.dateValeur.put(anneemois, stockPrice);
+        //String anneemois = "01/" + month + "/" + year;
+        DateYM d = new DateYM(year,month);
+        myStock.dateValeur.put(d, stockPrice);
 //        calendar.add(Calendar.DATE, -(jour-1));
 //        long date2 = calendar.getTimeInMillis();
 //        Date date3 = new Date(date2);
