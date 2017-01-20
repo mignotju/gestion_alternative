@@ -45,7 +45,10 @@ public class Main {
 		//for (int j = 1974; j <= 1997; j++) {
 		Portefeuille P10 = new Portefeuille();
 		Portefeuille P1 = new Portefeuille();
-		for (int j = 1974; j <= 1974; j++) {
+		double renta10;
+		double renta1;
+		int pourri=0;
+		for (int j = 1974; j <= 1997; j++) {
 			DateYM date = new DateYM(j,1);
 			for (int i : Parser.stockList) {
 				//System.out.println(i + " " + date.toString() + " " + Parser.stockNbrStock.get(i).rentaLast6Month(date));
@@ -62,9 +65,16 @@ public class Main {
 	        	}
 	        	compteur++;
 	        }
-
+	        renta10 = P10.renta(j);
+	        renta1 = P1.renta(j);
+	        System.out.println("renta p10 : " + renta10);
+	        System.out.println("renta p1 : " + renta1);
+	        if(renta10<renta1){
+	        	pourri++;
+	        }
+	        
 		}
-		
+		System.out.println("POURRI:"+pourri);
 		
 		
 	}

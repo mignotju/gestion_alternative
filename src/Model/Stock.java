@@ -54,7 +54,7 @@ public class Stock {
 				dBefore.setY(dBefore.getY()-1);
 				dBefore.setM(12);
 			}
-		}while(dateValeur.containsKey(dBefore));
+		}while(!dateValeur.containsKey(dBefore));
 		
 		do  {
 			dAfter= new DateYM(dAfter.getY(),dAfter.getM()+1);
@@ -62,7 +62,7 @@ public class Stock {
 				dAfter.setY(dAfter.getY()+1);
 				dAfter.setM(1);
 			}
-		}while(dateValeur.containsKey(dAfter));
+		}while(!dateValeur.containsKey(dAfter));
 		
 		return (dateValeur.get(dBefore) + dateValeur.get(dAfter))/2;
 	}
