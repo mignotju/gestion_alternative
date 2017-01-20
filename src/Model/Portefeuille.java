@@ -24,23 +24,21 @@ public class Portefeuille {
 	// Renvoie la renta du ptf sur une année
 	public double renta(int year) {
 		double r = 0.0;
-		double rentaThisMonth;
-		int sharedUsedThisMonth;
+		double rentaForAShare;
 		DateYM d;
-		for (int m = 1; m <= 12; m++) {
-			d = new DateYM(year,m);
-			rentaThisMonth=0.0;
-			sharedUsedThisMonth=0;
-			for (int i = 0; i < shares.length; i++) {
-				//Si un protefeuille n'a pas 
-				if(shares[i].dateValeur.containsKey(d)){
-					rentaThisMonth+=shares[i].dateValeur.get(d);
-					sharedUsedThisMonth++;
+		for (int i = 0; i < shares.length; i++) {
+			rentaForAShare=1;
+			for (int m = 1; m <= 12; m++) {
+				d = new DateYM(year,m);
+				if(shares[i].dateValeur.containsKey(d)) {
+					rentaForAShare*=(1+shares[i].dateValeur.get(d));
+				} else {
+					rentaForAShare*=(1+shares[i].getClosestRenta(d));
 				}
 			}
-			rentaThisMonth= rentaThisMonth/(double)sharedUsedThisMonth;
-			r +=rentaThisMonth;
+			r+=(rentaForAShare-1);
 		}
+		r=r/10;
 		return r;
 	}
 }
