@@ -11,23 +11,24 @@ public class Stock {
 		dateValeur = new LinkedHashMap<DateYM, Double>();
 	}
 
-	//Renvoie la rentabilité du stock au cours des 6 derniers mois avant referenceDate
-	public double rentaLast6Month(DateYM referenceDate) {		
+	// Renvoie la rentabilité du stock au cours des 6 derniers mois avant
+	// referenceDate
+	public double rentaLast6Month(DateYM referenceDate) {
 		double r = 1;
-		DateYM dBefore=referenceDate;
-		for(int i=0;i<6;i++){
-			dBefore= new DateYM(dBefore.getY(),dBefore.getM()-1);
-			if(dBefore.getM()==0){
-				dBefore.setY(dBefore.getY()-1);
+		DateYM dBefore = referenceDate;
+		for (int i = 0; i < 6; i++) {
+			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
+			if (dBefore.getM() == 0) {
+				dBefore.setY(dBefore.getY() - 1);
 				dBefore.setM(12);
 			}
-			if(dateValeur.containsKey(dBefore)){
-				r*= (1+dateValeur.get(dBefore));
+			if (dateValeur.containsKey(dBefore)) {
+				r *= (1 + dateValeur.get(dBefore));
 			} else {
-				r*=(1+getClosestRenta(dBefore));
+				r *= (1 + getClosestRenta(dBefore));
 			}
 		}
-		r-=1;
+		r -= 1;
 		return r;
 	}
 
@@ -42,28 +43,29 @@ public class Stock {
 		}
 		return res;
 	}
-	
-	
-	public double getClosestRenta(DateYM d){
+
+	public double getClosestRenta(DateYM d) {
 		DateYM dBefore, dAfter;
-		dBefore=d;
-		dAfter=d;
-		do  {
-			dBefore= new DateYM(dBefore.getY(),dBefore.getM()-1);
-			if(dBefore.getM()==0){
-				dBefore.setY(dBefore.getY()-1);
+		int spreadMonthBefore, spreadMonthAfter;
+		dBefore = d;
+		dAfter = d;
+		do {
+			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
+			if (dBefore.getM() == 0) {
+				dBefore.setY(dBefore.getY() - 1);
 				dBefore.setM(12);
 			}
-		}while(!dateValeur.containsKey(dBefore));
-		
-		do  {
-			dAfter= new DateYM(dAfter.getY(),dAfter.getM()+1);
-			if(dAfter.getM()==13){
-				dAfter.setY(dAfter.getY()+1);
+		} while (!dateValeur.containsKey(dBefore));
+
+		do {
+			dAfter = new DateYM(dAfter.getY(), dAfter.getM() + 1);
+			if (dAfter.getM() == 13) {
+				dAfter.setY(dAfter.getY() + 1);
 				dAfter.setM(1);
 			}
-		}while(!dateValeur.containsKey(dAfter));
-		
-		return (dateValeur.get(dBefore) + dateValeur.get(dAfter))/2;
+		} while (!dateValeur.containsKey(dAfter));
+		spreadMonthBefore = d.inMonth() - dBefore.inMonth();
+		spreadMonthAfter = dAfter.inMonth() - d.inMonth();
+		return (dateValeur.get(dBefore)* spreadMonthAfter + dateValeur.get(dAfter)* spreadMonthBefore) /(spreadMonthAfter+spreadMonthBefore);
 	}
 }
