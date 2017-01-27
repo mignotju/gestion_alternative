@@ -82,6 +82,7 @@ public class Parser {
     	int stockNumber;
     	int year = 0;
     	int month = 0;
+    	double beta = 0;
     	double returnRf;
     	Stock myStock = null;
     	double stockPrice = 0;
@@ -113,7 +114,9 @@ public class Parser {
                     break;
                 case 4:
                     stockPrice = cell.getNumericCellValue();
-
+                    break;
+                case 5:
+                    beta = cell.getNumericCellValue();
                     break;
                     /*case 8:
                     Moodys = cell.getStringCellValue();
@@ -136,6 +139,7 @@ public class Parser {
         //String anneemois = "01/" + month + "/" + year;
         DateYM d = new DateYM(year,month);
         myStock.dateValeur.put(d, stockPrice);
+        myStock.dateBeta.put(d, beta);
 //        calendar.add(Calendar.DATE, -(jour-1));
 //        long date2 = calendar.getTimeInMillis();
 //        Date date3 = new Date(date2);

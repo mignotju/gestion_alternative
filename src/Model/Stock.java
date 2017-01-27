@@ -5,16 +5,18 @@ import java.util.*;
 public class Stock {
 	public int stockNumber;
 	public Map<DateYM, Double> dateValeur;
+	public Map<DateYM, Double> dateBeta;
 
 	public Stock(int stockNum) {
 		stockNumber = stockNum;
 		dateValeur = new LinkedHashMap<DateYM, Double>();
+		dateBeta = new LinkedHashMap<DateYM, Double>();
 	}
 
 	// Renvoie la rentabilité du stock au cours des 6 derniers mois avant
 	// referenceDate
 	public double rentaLast6Month(DateYM referenceDate) {
-		double r = 1;
+		double r = 1.0;
 		DateYM dBefore = referenceDate;
 		for (int i = 0; i < 6; i++) {
 			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
@@ -42,6 +44,10 @@ public class Stock {
 			res += key + " => " + dateValeur.get(key) + "\n";
 		}
 		return res;
+	}
+	
+	public String toStringName() {
+		return Integer.toString(stockNumber);
 	}
 
 	public double getClosestRenta(DateYM d) {

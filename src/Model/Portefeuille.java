@@ -41,4 +41,17 @@ public class Portefeuille {
 		r=r/10;
 		return r;
 	}
+	
+	public String toString() {
+		String res = "Le portefeuille est composé des titres suivant : \n";
+		for (int i = 0; i < shares.length; i++) {
+			if (i!=shares.length-1) {
+				res += shares[i].toStringName() + ",";
+			} else {
+				res += shares[i].toStringName();
+			}
+			
+		}
+		return res + "\n";
+	}
 }
