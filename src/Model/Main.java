@@ -73,10 +73,18 @@ public class Main {
 	        }
 	        if (j>1974) {
 	        	coutTransaction += P1.computeTransaction(date);
+	        	coutTransaction += P10.computeTransaction(date);
 	        }
-	        
+	        //System.out.println(coutTransaction);
 	        renta10 = P10.renta(j);
+	        P10.oldValue = P10.newValue;
+	        P10.newValue = P10.newValue * (1+renta10);
+	        System.out.println("p10 old value puis new value  -  " + P10.oldValue + "  -  " + P10.newValue);
 	        renta1 = P1.renta(j);
+	        P1.oldValue = P1.newValue;
+	        P1.newValue = P1.newValue * (1+renta1);
+
+	        //System.out.println("p1 old value puis new value  -  " + P1.oldValue + "  -  " + P1.newValue);
 	        //System.out.println("En " + j + " :");
 	        //System.out.println("Le portefeuille P10 a une renta de : " + renta10);
 	        //System.out.println(P10.toString());
