@@ -33,6 +33,26 @@ public class Stock {
 		r -= 1;
 		return r;
 	}
+	
+	public double rentaLastYear(DateYM referenceDate) {
+		double r = 1;
+		DateYM dBefore = referenceDate;
+		for (int i = 0; i < 12; i++) {
+			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
+			if (dBefore.getM() == 0) {
+				dBefore.setY(dBefore.getY() - 1);
+				dBefore.setM(12);
+			}
+			if (dateValeur.containsKey(dBefore)) {
+				r *= (1 + dateValeur.get(dBefore));
+			} else {
+				r *= (1 + getClosestRenta(dBefore));
+			}
+		}
+		r -= 1;
+		return r;
+	}
+	
 
 	public String toString() {
 		String res = "";
