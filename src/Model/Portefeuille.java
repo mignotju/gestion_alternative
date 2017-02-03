@@ -1,10 +1,20 @@
 package Model;
 
 public class Portefeuille {
-	private Stock[] shares;// tableau des 10 actifs concernés
+	public Stock[] shares;// tableau des 10 actifs concernés
+	public Stock[] oldShares;// tableau des 10 actifs concernés
+	public double newValue;
+	public double oldValue;
 
 	public Portefeuille() {
 		shares = new Stock[10];
+		oldShares = new Stock[10];
+		Stock s = new Stock(-1);
+		for (int i = 0; i < shares.length; i++) {
+			shares[i] = s;
+		}
+		newValue = 100;
+			
 	}
 
 	public Portefeuille(Stock[] shares) {
@@ -21,6 +31,24 @@ public class Portefeuille {
 		shares[i] = s;
 	}
 
+	public boolean oldSharesContains(Stock s) {
+		for (int i = 0; i < oldShares.length; i++) {
+			if (oldShares[i].stockNumber == s.stockNumber) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean newShareContains(Stock s) {
+		for (int i = 0; i < shares.length; i++) {
+			if (shares[i].stockNumber == s.stockNumber) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// Renvoie la renta du ptf sur une année
 	public double renta(int year) {
 		double r = 0.0;
@@ -54,4 +82,54 @@ public class Portefeuille {
 		}
 		return res + "\n";
 	}
+	
+	public double computeTransaction(DateYM date) {
+		double res = 0;
+		for (int i = 0; i < shares.length; i++) {
+			if (oldSharesContains(shares[i])) {
+				//J'avais déjà cet actif, je paye la différence seulement.
+				//J'avais 10% de oldValue ->10€
+				//J'ai besoin de 10% de newValue 
+				// l'actif i vaut maintenant shares[i].rentaLastYear(date);
+				res += Math.abs(newValue/10. - (oldValue/10.)*shares[i].rentaLastYear(date))*0.001;
+			} else {
+				//Je n'avais pas cet actif mais j'en ai besoin.
+				res+= 0.001*newValue/10.;
+			}
+			if (!newShareContains(oldShares[i])) {
+				res += (oldValue/10.)*shares[i].rentaLastYear(date)*0.001;
+			}
+		}
+				
+		return res;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

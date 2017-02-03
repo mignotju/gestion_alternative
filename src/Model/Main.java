@@ -30,6 +30,9 @@ public class Main {
 }
 	
 	public static void main(String [ ] args) {
+		double richesse = 100;
+		double coutTransaction = richesse * 0.1/100;
+
 		Map<Integer, Double> stockRenta = new TreeMap<Integer,Double>();
 		Map<Integer, Double> sortedStockRenta;
 		System.out.println("Hello");
@@ -56,19 +59,29 @@ public class Main {
 			}
 	        sortedStockRenta = sortByValue(stockRenta);
 	        int compteur = 0;
+        	//System.out.println("debut ");
+	        P1.oldShares = P1.shares;
+	        P10.oldShares = P10.shares;
 	        for (int s : sortedStockRenta.keySet()) {
 	        	if (compteur < 10) {
 	        		P1.set(compteur, Parser.stockNbrStock.get(s));
 	        	}
 	        	if (compteur >= 90) {
 	        		P10.set(99-compteur, Parser.stockNbrStock.get(s));
-	        	}
+	        	} 
 	        	compteur++;
 	        }
+	        if (j>1974) {
+	        	coutTransaction += P1.computeTransaction(date);
+	        }
+	        
 	        renta10 = P10.renta(j);
 	        renta1 = P1.renta(j);
-	        System.out.println("renta p10 : " + renta10);
-	        System.out.println("renta p1 : " + renta1);
+	        //System.out.println("En " + j + " :");
+	        //System.out.println("Le portefeuille P10 a une renta de : " + renta10);
+	        //System.out.println(P10.toString());
+	        //System.out.println("Le portefeuille P1 a une renta de : " + renta1);
+	        //System.out.println(P1.toString());
 	        if(renta10<renta1){
 	        	pourri++;
 	        }

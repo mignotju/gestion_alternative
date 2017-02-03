@@ -41,7 +41,7 @@ public class Stock {
 		// Parcourir les clés et afficher les entrées de chaque clé;
 		while (iterateur.hasNext()) {
 			Object key = iterateur.next();
-			res += key + " => " + dateValeur.get(key) + "\n";
+			res += key + " => " + dateValeur.get(key) + " beta : " + dateBeta.get(key) + "\n";
 		}
 		return res;
 	}

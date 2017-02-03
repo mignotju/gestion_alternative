@@ -90,7 +90,7 @@ public class Parser {
     	Iterator<Cell> cellIterator = myLine.cellIterator();
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
-            if (cell.getColumnIndex() > 4)
+            if (cell.getColumnIndex() > 5)
             	break;
             switch (cell.getColumnIndex()) {
                 case 0:
