@@ -75,7 +75,7 @@ public class Main {
 	        	coutTransaction += P1.computeTransaction(date);
 	        	coutTransaction += P10.computeTransaction(date);
 	        }
-	        //System.out.println(coutTransaction);
+	        System.out.println(coutTransaction);
 	        renta10 = P10.renta(j);
 	        P10.oldValue = P10.newValue;
 	        P10.newValue = P10.newValue * (1+renta10);
@@ -91,11 +91,13 @@ public class Main {
 	        //System.out.println("Le portefeuille P1 a une renta de : " + renta1);
 	        //System.out.println(P1.toString());
 	        if(renta10<renta1){
+	        	
 	        	pourri++;
 	        }
 	        
 		}
 		System.out.println("POURRI:"+pourri);
+		System.out.println(Marche.toStringStatic());
 		
 		
 	}

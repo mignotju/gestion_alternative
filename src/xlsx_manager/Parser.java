@@ -86,12 +86,13 @@ public class Parser {
     	double returnRf;
     	Stock myStock = null;
     	double stockPrice = 0;
+    	double market = 0;
 
     	Iterator<Cell> cellIterator = myLine.cellIterator();
         while (cellIterator.hasNext()) {
             Cell cell = cellIterator.next();
-            if (cell.getColumnIndex() > 5)
-            	break;
+            if (cell.getColumnIndex() > 5 && cell.getColumnIndex() != 27)
+            	continue;
             switch (cell.getColumnIndex()) {
                 case 0:
                     stockNumber = (int) cell.getNumericCellValue();
@@ -118,6 +119,8 @@ public class Parser {
                 case 5:
                     beta = cell.getNumericCellValue();
                     break;
+                case 27:
+                	market = cell.getNumericCellValue();
                     /*case 8:
                     Moodys = cell.getStringCellValue();
 
@@ -140,6 +143,7 @@ public class Parser {
         DateYM d = new DateYM(year,month);
         myStock.dateValeur.put(d, stockPrice);
         myStock.dateBeta.put(d, beta);
+        Marche.addValue(d, market);
 //        calendar.add(Calendar.DATE, -(jour-1));
 //        long date2 = calendar.getTimeInMillis();
 //        Date date3 = new Date(date2);
