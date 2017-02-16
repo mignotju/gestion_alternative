@@ -84,7 +84,7 @@ public class Main {
 	        P1.oldValue = P1.newValue;
 	        P1.newValue = P1.newValue * (1+renta1);
 
-	        //System.out.println("p1 old value puis new value  -  " + P1.oldValue + "  -  " + P1.newValue);
+	        System.out.println("p1 old value puis new value  -  " + P1.oldValue + "  -  " + P1.newValue);
 	        //System.out.println("En " + j + " :");
 	        //System.out.println("Le portefeuille P10 a une renta de : " + renta10);
 	        //System.out.println(P10.toString());
@@ -97,7 +97,7 @@ public class Main {
 	        
 		}
 		System.out.println("POURRI:"+pourri);
-		System.out.println(Marche.toStringStatic());
+		//System.out.println(Marche.toStringStatic());
 		
 		
 	}

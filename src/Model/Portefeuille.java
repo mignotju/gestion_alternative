@@ -55,6 +55,7 @@ public class Portefeuille {
 		double rentaForAShare;
 		DateYM d;
 		for (int i = 0; i < shares.length; i++) {
+			
 			rentaForAShare=1;
 			for (int m = 1; m <= 12; m++) {
 				d = new DateYM(year,m);
@@ -66,7 +67,8 @@ public class Portefeuille {
 			}
 			r+=(rentaForAShare-1);
 		}
-		r=r/10;
+		r=r/10.0;
+
 		return r;
 	}
 	
