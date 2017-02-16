@@ -53,6 +53,25 @@ public class Stock {
 		return r;
 	}
 	
+	//renvoie la moyenne des baté sur les 6 derniers mois
+	public double betaLast6Month(DateYM referenceDate){
+		double moyenneBeta = 0.0;
+		DateYM dBefore = referenceDate;
+		for (int i = 0; i < 6; i++) {
+			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
+			if (dBefore.getM() == 0) {
+				dBefore.setY(dBefore.getY() - 1);
+				dBefore.setM(12);
+			}
+			if (dateBeta.containsKey(dBefore)) {
+				moyenneBeta +=  dateBeta.get(dBefore);
+			} else {
+				moyenneBeta +=  getClosestBeta(dBefore);
+			}
+		}
+		moyenneBeta /= 6;
+		return moyenneBeta;
+	}
 
 	public String toString() {
 		String res = "";
@@ -93,5 +112,30 @@ public class Stock {
 		spreadMonthBefore = d.inMonth() - dBefore.inMonth();
 		spreadMonthAfter = dAfter.inMonth() - d.inMonth();
 		return (dateValeur.get(dBefore)* spreadMonthAfter + dateValeur.get(dAfter)* spreadMonthBefore) /(spreadMonthAfter+spreadMonthBefore);
+	}
+	
+	public double getClosestBeta(DateYM d) {
+		DateYM dBefore, dAfter;
+		int spreadMonthBefore, spreadMonthAfter;
+		dBefore = d;
+		dAfter = d;
+		do {
+			dBefore = new DateYM(dBefore.getY(), dBefore.getM() - 1);
+			if (dBefore.getM() == 0) {
+				dBefore.setY(dBefore.getY() - 1);
+				dBefore.setM(12);
+			}
+		} while (!dateBeta.containsKey(dBefore));
+
+		do {
+			dAfter = new DateYM(dAfter.getY(), dAfter.getM() + 1);
+			if (dAfter.getM() == 13) {
+				dAfter.setY(dAfter.getY() + 1);
+				dAfter.setM(1);
+			}
+		} while (!dateBeta.containsKey(dAfter));
+		spreadMonthBefore = d.inMonth() - dBefore.inMonth();
+		spreadMonthAfter = dAfter.inMonth() - d.inMonth();
+		return (dateBeta.get(dBefore)* spreadMonthAfter + dateBeta.get(dAfter)* spreadMonthBefore) /(spreadMonthAfter+spreadMonthBefore);
 	}
 }
