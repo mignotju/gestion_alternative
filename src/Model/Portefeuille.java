@@ -31,6 +31,24 @@ public class Portefeuille {
 		shares[i] = s;
 	}
 
+	public String rentaMonth(DateYM date) {
+		double sum = 0;
+		double sumBeta = 0;
+		for (int i = 0; i < shares.length; i++) {
+			
+			if (shares[i].dateValeur.containsKey(date)) {
+				sum += shares[i].dateValeur.get(date);
+				sumBeta += shares[i].dateBeta.get(date);
+			} else {
+				//System.out.println(i + " " + date.toString() + " " + shares[i].toStringName());
+				sum += shares[i].getClosestRenta(date);
+				sumBeta += shares[i].getClosestBeta(date);
+			}
+			
+		}
+		return sum/10.0 +","+ sumBeta/10.0;
+	}
+	
 	public boolean oldSharesContains(Stock s) {
 		for (int i = 0; i < oldShares.length; i++) {
 			if (oldShares[i].stockNumber == s.stockNumber) {
@@ -74,6 +92,7 @@ public class Portefeuille {
 	
 	public String toString() {
 		String res = "Le portefeuille est composé des titres suivant : \n";
+		res="";
 		for (int i = 0; i < shares.length; i++) {
 			if (i!=shares.length-1) {
 				res += shares[i].toStringName() + ",";
@@ -82,7 +101,7 @@ public class Portefeuille {
 			}
 			
 		}
-		return res + "\n";
+		return res ;
 	}
 	
 	public double computeTransaction(DateYM date) {

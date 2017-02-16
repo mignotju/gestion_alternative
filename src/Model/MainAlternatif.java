@@ -55,7 +55,6 @@ public class MainAlternatif {
 			}
 			sortedStockBeta = sortByValue(stockBeta);
 			int compteur = 0;
-			System.out.println("Renta marché avant " + date.getY() + " = " + Marche.rentaLast6Month(date));
 			for (int s : sortedStockBeta.keySet()) {
 				if (compteur < 50) {
 					stockRentaBadB.put(Parser.stockNbrStock.get(s).stockNumber,
@@ -102,11 +101,20 @@ public class MainAlternatif {
 			renta10 = P10.renta(j);
 			P10.oldValue = P10.newValue;
 			P10.newValue = P10.newValue * (1 + renta10);
-			System.out.println("p10 old value puis new value  \t\t  " + P10.oldValue + "  \t\t  " + P10.newValue);
+			
+			//Je print la premiere date
+			System.out.println(P1.rentaMonth(date));
+			for (int i = 2; i <= 12; i++) {
+				//date va faire tous les mois
+				date = new DateYM(date.getY(), i);
+				System.out.println(P1.rentaMonth(date));
+			}
 			renta1 = P1.renta(j);
+
+			//System.out.println(renta1);
 			P1.oldValue = P1.newValue;
 			P1.newValue = P1.newValue * (1 + renta1);
-			System.out.println("p1 old value puis new value  \t\t  " + P1.oldValue + "  \t\t  " + P1.newValue);
+			//System.out.println("p1 old value puis new value  \t\t  " + P1.oldValue + "  \t\t  " + P1.newValue);
 			stockBeta.clear();
 			stockRentaBadB.clear();
 			stockRentaGoodB.clear();
