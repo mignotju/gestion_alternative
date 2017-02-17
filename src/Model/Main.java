@@ -30,7 +30,7 @@ public class Main {
 }
 	
 	public static void main(String [ ] args) {
-		double richesse = 100;
+		double richesse = 200;
 		double coutTransaction = richesse * 0.1/100;
 
 		Map<Integer, Double> stockRenta = new TreeMap<Integer,Double>();
@@ -38,14 +38,7 @@ public class Main {
 		System.out.println("Hello");
 		File file = new File("data.xlsx");
 		Parser.parse(file);
-		//System.out.println(Parser.getStock(467).toString());
-		//pour chaque actions, je calcule la perf de l'année (sur les 6  derniers mois)
-		// On forme p1 à p10
 		
-		// P = p10
-		// en t=0, j'achete 100€ de p10.
-		// en t=1, je vend p10, je fais un bénéfice ou perte. je rachete p10.
-		//for (int j = 1974; j <= 1997; j++) {
 		Portefeuille P10 = new Portefeuille();
 		Portefeuille P1 = new Portefeuille();
 		double renta10;
@@ -71,20 +64,22 @@ public class Main {
 	        	} 
 	        	compteur++;
 	        }
+	        double coutCetteAnnee=0.2;
 	        if (j>1974) {
+	        	coutCetteAnnee = P1.computeTransaction(date) + P10.computeTransaction(date);
 	        	coutTransaction += P1.computeTransaction(date);
 	        	coutTransaction += P10.computeTransaction(date);
 	        }
-	        System.out.println(coutTransaction);
+	        System.out.print(coutCetteAnnee+",");
 	        renta10 = P10.renta(j);
 	        P10.oldValue = P10.newValue;
 	        P10.newValue = P10.newValue * (1+renta10);
-	        System.out.println("p10 old value puis new value  -  " + P10.oldValue + "  -  " + P10.newValue);
+	        //System.out.println("p10 old value puis new value  -  " + P10.oldValue + "  -  " + P10.newValue);
 	        renta1 = P1.renta(j);
 	        P1.oldValue = P1.newValue;
 	        P1.newValue = P1.newValue * (1+renta1);
 
-	        System.out.println("p1 old value puis new value  -  " + P1.oldValue + "  -  " + P1.newValue);
+	        //System.out.println("p1 old value puis new value  -  " + P1.oldValue + "  -  " + P1.newValue);
 	        //System.out.println("En " + j + " :");
 	        //System.out.println("Le portefeuille P10 a une renta de : " + renta10);
 	        //System.out.println(P10.toString());

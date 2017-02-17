@@ -115,6 +115,7 @@ public class Portefeuille {
 				res += Math.abs(newValue/10. - (oldValue/10.)*shares[i].rentaLastYear(date))*0.001;
 			} else {
 				//Je n'avais pas cet actif mais j'en ai besoin.
+				//j'aurais dis : je dois le vendre. et du coup au prix quelle vaut
 				res+= 0.001*newValue/10.;
 			}
 			if (!newShareContains(oldShares[i])) {
